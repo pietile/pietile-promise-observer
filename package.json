@@ -2,6 +2,11 @@
   "name": "pietile-promise-observer",
   "version": "1.0.0",
   "description": "Simple Promise observer",
+  "keywords": [
+    "promise",
+    "observer",
+    "subscribe"
+  ],
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
