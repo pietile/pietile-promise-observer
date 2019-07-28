@@ -17,14 +17,14 @@ function asyncAction(): Promise<number> {
   });
 }
 
-function resultHandler(error: Error | null, value?: number): void {
-  if (error) {
+function resultHandler(result: PromiseResult<number>): void {
+  if (result.error) {
     // Smth wrong happened
-    console.log("Error :(", error.message);
+    console.log("Error :(", result.error.message);
     return;
   }
 
-  console.log(value);
+  console.log(result.value + 1);
 }
 
 const promiseObserver = new PromiseObserver<number>();

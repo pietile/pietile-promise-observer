@@ -1,13 +1,23 @@
-export type Callback<T> = (e: Error | null, value?: T) => void;
+export type PromiseResult<T> =
+  | {
+      value: null;
+      error: Error;
+    }
+  | {
+      value: T;
+      error: null;
+    };
+
+export type Callback<T> = (result: PromiseResult<T>) => void;
 
 export class PromiseObserver<T> {
   private subscription?: { callback?: Callback<T> };
 
-  isSubscribed() {
-    return this.subscription !== undefined;
+  isSubscribed(): boolean {
+    return !!this.subscription;
   }
 
-  subscribe(promise: Promise<T>, callback: Callback<T>) {
+  subscribe(promise: Promise<T>, callback: Callback<T>): void {
     this.unsubscribe();
 
     const subscription = {
@@ -23,9 +33,9 @@ export class PromiseObserver<T> {
         const { callback: subscriptionCallback } = subscription;
         this.unsubscribe();
 
-        subscriptionCallback(null, value);
+        subscriptionCallback({ value, error: null });
       })
-      .catch((e: Error) => {
+      .catch((error: Error) => {
         if (!subscription.callback) {
           return;
         }
@@ -33,13 +43,13 @@ export class PromiseObserver<T> {
         const { callback: subscriptionCallback } = subscription;
         this.unsubscribe();
 
-        subscriptionCallback(e);
+        subscriptionCallback({ value: null, error });
       });
 
     this.subscription = subscription;
   }
 
-  unsubscribe() {
+  unsubscribe(): void {
     if (!this.subscription) {
       return;
     }
