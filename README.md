@@ -7,7 +7,7 @@ As Promise can't be canceled we can just unsubscribe from its result when don't 
 ## Usage example
 
 ```tsx
-import { PromiseObserver } from "./PromiseObserver";
+import { PromiseObserver, PromiseResult } from "./PromiseObserver";
 
 function asyncAction(): Promise<number> {
   return new Promise(resolve => {
