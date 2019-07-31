@@ -1,6 +1,4 @@
-# Promise Observer
-
-[![npm version](https://badgen.net/bundlephobia/minzip/pietile-promise-observer)](https://bundlephobia.com/result?p=pietile-promise-observer@latest)
+# Promise Observer &middot; [![npm version](https://badgen.net/bundlephobia/minzip/pietile-promise-observer)](https://bundlephobia.com/result?p=pietile-promise-observer@latest)
 
 As Promise can't be canceled we can just unsubscribe from its result when don't need it.
 
