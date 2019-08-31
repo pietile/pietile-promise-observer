@@ -1,20 +1,28 @@
 {
   "name": "pietile-promise-observer",
   "version": "1.1.1",
+  "license": "MIT",
   "description": "Simple Promise observer",
   "keywords": [
     "promise",
     "observer",
     "subscribe"
   ],
-  "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "tsc"
+    "build": "rimraf dist && tsc"
   },
   "devDependencies": {
-    "typescript": "3.5.3"
+    "@types/node": "~12.7.0",
+    "rimraf": "~3.0.0",
+    "typescript": "3.6.2"
+  },
+  "bugs": {
+    "url": "https://github.com/pietile/pietile-promise-observer/issues"
   },
   "repository": {
     "type": "git",
