@@ -1,7 +1,7 @@
 # Pietile Promise Observer
 
 [![npm version](https://badgen.net/npm/v/pietile-promise-observer?color=56C838)](https://www.npmjs.com/package/pietile-promise-observer)
-[![bundle size](https://badgen.net/bundlephobia/minzip/pietile-promise-observer)](https://bundlephobia.com/result?p=pietile-promise-observer@latest)
+[![install size](https://badgen.net/packagephobia/install/pietile-promise-observer)](https://packagephobia.now.sh/result?p=pietile-promise-observer)
 
 As Promise can't be canceled we can just unsubscribe from its result when don't need it.
 
