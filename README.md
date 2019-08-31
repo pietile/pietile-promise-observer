@@ -1,6 +1,23 @@
-# Promise Observer &middot; [![npm version](https://badgen.net/bundlephobia/minzip/pietile-promise-observer)](https://bundlephobia.com/result?p=pietile-promise-observer@latest)
+# Pietile Promise Observer
+
+[![npm version](https://badgen.net/npm/v/pietile-promise-observer?color=56C838)](https://www.npmjs.com/package/pietile-promise-observer)
+[![bundle size](https://badgen.net/bundlephobia/minzip/pietile-promise-observer)](https://bundlephobia.com/result?p=pietile-promise-observer@latest)
 
 As Promise can't be canceled we can just unsubscribe from its result when don't need it.
+
+## Installation
+
+Using yarn
+
+```sh
+yarn add pietile-promise-observer
+```
+
+or using npm
+
+```sh
+npm install -S pietile-promise-observer
+```
 
 ## Usage example
 
@@ -38,11 +55,26 @@ promiseObserver.unsubscribe();
 
 ## API
 
-| name                                                  | description                         |
-| :---------------------------------------------------- | :---------------------------------- |
-| subscribe(promise: Promise<T>, callback: Callback<T>) | Subscribe to promise result         |
-| unsubscribe()                                         | Unsubscribe from Promise            |
-| isSubscribed()                                        | Is awaiting for any promise result? |
+### `new PromiseObserver<T>()`
+
+Create new PromiseObserver for Promises of result `T`.
+
+### `subscribe(promise: Promise<T>, callback: Callback<T>): void`
+
+Subscribe to `promise`. After the `promise` is resolved the `callback` will be called with either
+`{ value: null; error: Error; }` or `{ value: T; error: null; }` argument.
+
+### `unsubscribe(): void`
+
+Unsubscribe from subscribed Promise
+
+### `isSubscribed(): boolean`
+
+Is observer awaiting for any promise result?
+
+### `PromiseObserver.WARN_ON_ERROR`
+
+Static property. When true will warn in console on each rejection. Useful for debugging
 
 ## License
 
