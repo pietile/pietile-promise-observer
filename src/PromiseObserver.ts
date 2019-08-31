@@ -11,6 +11,8 @@ export type PromiseResult<T> =
 export type Callback<T> = (result: PromiseResult<T>) => void;
 
 export class PromiseObserver<T> {
+  static WARN_ON_ERROR = false;
+
   private subscription?: { callback?: Callback<T> };
 
   isSubscribed(): boolean {
@@ -38,6 +40,10 @@ export class PromiseObserver<T> {
       .catch((error: Error) => {
         if (!subscription.callback) {
           return;
+        }
+
+        if (PromiseObserver.WARN_ON_ERROR) {
+          console.warn(error);
         }
 
         const { callback: subscriptionCallback } = subscription;
