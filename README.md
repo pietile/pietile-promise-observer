@@ -22,10 +22,10 @@ npm install -S pietile-promise-observer
 ## Usage example
 
 ```tsx
-import { PromiseObserver, PromiseResult } from "./PromiseObserver";
+import { PromiseObserver, PromiseResult } from "pietile-promise-observer";
 
 function asyncAction(): Promise<number> {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     setTimeout(() => {
       resolve(Math.random());
     }, 1000);
