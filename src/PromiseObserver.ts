@@ -19,37 +19,44 @@ export class PromiseObserver<T> {
     return !!this.subscription;
   }
 
-  subscribe(promise: Promise<T>, callback: Callback<T>): void {
+  subscribe(
+    promise: Promise<T>,
+    callback: Callback<T>,
+    unsubscribedCallback?: Callback<T>
+  ): void {
     this.unsubscribe();
 
     const subscription = {
-      callback
+      callback,
+    };
+
+    const process = (result: PromiseResult<T>): boolean => {
+      if (!subscription.callback) {
+        if (unsubscribedCallback) {
+          unsubscribedCallback(result);
+        }
+
+        return false;
+      }
+
+      const { callback: subscriptionCallback } = subscription;
+      this.unsubscribe();
+
+      subscriptionCallback(result);
+
+      return true;
     };
 
     promise
       .then((value: T) => {
-        if (!subscription.callback) {
-          return;
-        }
-
-        const { callback: subscriptionCallback } = subscription;
-        this.unsubscribe();
-
-        subscriptionCallback({ value, error: null });
+        process({ value, error: null });
       })
       .catch((error: Error) => {
-        if (!subscription.callback) {
-          return;
-        }
+        const subscribed = process({ value: null, error });
 
-        if (PromiseObserver.WARN_ON_ERROR) {
+        if (!subscribed && PromiseObserver.WARN_ON_ERROR) {
           console.warn(error);
         }
-
-        const { callback: subscriptionCallback } = subscription;
-        this.unsubscribe();
-
-        subscriptionCallback({ value: null, error });
       });
 
     this.subscription = subscription;
