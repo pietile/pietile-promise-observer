@@ -23,7 +23,7 @@ export class PromiseObserver {
     promise: Promise<T>,
     callback: Callback<T>,
     unsubscribedCallback?: Callback<T>
-  ): void {
+  ): Promise<T> {
     this.unsubscribe();
 
     const subscription = {
@@ -60,6 +60,8 @@ export class PromiseObserver {
       });
 
     this.subscription = subscription;
+
+    return promise;
   }
 
   unsubscribe(): void {
