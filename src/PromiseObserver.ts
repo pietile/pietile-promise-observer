@@ -10,16 +10,16 @@ export type PromiseResult<T> =
 
 export type Callback<T> = (result: PromiseResult<T>) => void;
 
-export class PromiseObserver<T> {
+export class PromiseObserver {
   static WARN_ON_ERROR = false;
 
-  private subscription?: { callback?: Callback<T> };
+  private subscription?: { callback?: Callback<any> };
 
   isSubscribed(): boolean {
     return !!this.subscription;
   }
 
-  subscribe(
+  subscribe<T>(
     promise: Promise<T>,
     callback: Callback<T>,
     unsubscribedCallback?: Callback<T>
