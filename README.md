@@ -55,14 +55,14 @@ promiseObserver.unsubscribe();
 
 ## API
 
-### `new PromiseObserver<T>()`
+### `new PromiseObserver()`
 
-Create new PromiseObserver for Promises of result `T`.
+Create new PromiseObserver.
 
-### `subscribe(promise: Promise<T>, callback: Callback<T>): void`
+### `subscribe(promise: Promise<T>, callback: Callback<T>): Promise<T>`
 
 Subscribe to `promise`. After the `promise` is resolved the `callback` will be called with either
-`{ value: null; error: Error; }` or `{ value: T; error: null; }` argument.
+`{ value: null; error: Error; }` or `{ value: T; error: null; }` argument. Return the same promise.
 
 ### `unsubscribe(): void`
 
