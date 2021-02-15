@@ -59,10 +59,10 @@ promiseObserver.unsubscribe();
 
 Create new PromiseObserver.
 
-### `subscribe(promise: Promise<T>, callback: Callback<T>): Promise<T>`
+### `subscribe(promise: Promise<T>, callback: Callback<T>, unsubscribedCallback?: Callback<T>): Promise<T>`
 
 Subscribe to `promise`. After the `promise` is resolved the `callback` will be called with either
-`{ value: null; error: Error; }` or `{ value: T; error: null; }` argument. Return the same promise.
+`{ value: null; error: Error; }` or `{ value: T; error: null; }` argument. Optional `unsubscribedCallback` will be called for unsubscribed promises. Return the same promise.
 
 ### `unsubscribe(): void`
 
